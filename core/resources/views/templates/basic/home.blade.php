@@ -1,11 +1,9 @@
 
 
-  @auth
     @php
       header('Location: user/login');
       die();
     @endphp
-  @endauth
 
 
 @extends($activeTemplate.'layouts.frontend')
