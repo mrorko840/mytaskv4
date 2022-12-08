@@ -222,14 +222,9 @@
 
     </main>
     <!-- footer-->
-    @include($activeTemplate . 'includes.bottom_nav')
+    @include($activeTemplate . 'includes.bottom_nav') 
+
 </body>
-
-
-
-
-
-
 
 
 
