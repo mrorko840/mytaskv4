@@ -91,9 +91,8 @@
                                             <img src="{{ getImage(imagePath()['profile']['user']['path'] . '/' . @$data->image, imagePath()['profile']['user']['size']) }}" alt="">
                                             </div>
                                         </div>
-                                        <p class="text-secondary"><small>{{ __($data->username) }}</small></p>
-                                        <br>
-                                        <p class="text-secondary"><small>{{ __($log->plan ? $log->plan->name : "No Plan") }}</small></p>
+                                        <p class="text-secondary mb-0"><small>{{ __($data->username) }}</small></p>
+                                        <p class="text-info"><small>{{ __($data->plan ? $data->plan->name : "No Plan") }}</small></p>
                                     </div>
                                 </div>
                             </div>

@@ -13,6 +13,7 @@ Route::namespace('User\Auth')->name('user.')->group(function () {
     Route::controller('RegisterController')->group(function(){
         Route::get('register', 'showRegistrationForm')->name('register');
         Route::post('register', 'register')->middleware('registration.status');
+        Route::get('register/{reference}', 'referralRegister')->name('refer.register');
         Route::post('check-mail', 'checkUser')->name('checkUser');
     });
 

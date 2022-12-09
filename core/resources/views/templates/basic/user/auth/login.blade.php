@@ -3,7 +3,80 @@
 @php
     $loginCaption = getContent('login.content',true);
 @endphp
-<section class="pt-120 pb-120">
+
+<body class="body-scroll d-flex flex-column h-100 menu-overlay">
+
+
+
+
+  <!-- Begin page content -->
+  <main class="flex-shrink-0 main has-footer">
+
+      <!-- Fixed navbar -->
+      <header class="header">
+          <div class="row">
+              <div class="col-auto px-0">
+                  <button class="menu-btn btn btn-40 btn-link back-btn" type="button">
+                      <span class="material-icons">keyboard_arrow_left</span>
+                  </button>
+              </div>
+              <div class="text-left col align-self-center">
+                 
+              </div>
+              <div class="ml-auto col-auto align-self-center">
+                  <a href="{{ route('user.register') }}" class="text-white">
+                      Sign up
+                  </a>
+              </div>
+          </div>
+      </header>
+      
+  <form method="POST" action="{{ route('user.login')}}" class="login-form mt-50 verify-gcaptcha">
+      @csrf
+          <div class="container h-100 text-white">
+              <div class="row h-100">
+                  <div class="col-12 align-self-center mb-4">
+                      <div class="row justify-content-center">
+                          <div class="col-11 col-sm-7 col-md-6 col-lg-5 col-xl-4">
+                              <h2 class="font-weight-normal mb-5">Login into<br>your account</h2>
+                              <div class="form-group float-label active">
+                                  <input type="text" class="form-control text-white" value="{{ old('username') }}" name="username" required>
+                                  <label class="form-control-label text-white">Username/Email</label>
+                              </div>
+                              <div class="form-group float-label position-relative">
+                                  <input type="password" class="form-control text-white" name="password" required>
+                                  <label class="form-control-label text-white">Password</label>
+                              </div>  
+                              <p class="text-right"><a href="{{ route('user.password.request') }}" class="text-white">Forgot Password?</a></p>
+                          </div>
+                      </div>
+                  </div>
+                  
+              </div>
+          </div>
+      </main>
+
+      <!-- footer-->
+      <div class="footer no-bg-shadow py-3">
+          <div class="row justify-content-center">
+              <div class="col">
+                  <button type="submit" id="recaptcha" class="btn btn-default rounded btn-block">@lang('Login Now')</button>
+              </div>
+          </div>
+      </div>
+
+  </form>
+
+  
+</body>
+
+
+
+
+
+
+
+{{-- <section class="pt-120 pb-120">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-6">
@@ -42,5 +115,7 @@
         </div>
       </div>
     </div>
-</section>
+</section> --}}
+
+
 @endsection

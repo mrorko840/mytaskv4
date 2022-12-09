@@ -39,6 +39,15 @@ class RegisterController extends Controller
         $this->middleware('registration.status')->except('registrationNotAllowed');
         $this->activeTemplate = activeTemplate();
     }
+    public function referralRegister($reference)
+    {
+        $pageTitle = "Sign Up";
+        session()->put('reference', $reference);
+        $info       = json_decode(json_encode(getIpInfo()), true);
+        $mobileCode = @implode(',', $info['code']);
+        $countries  = json_decode(file_get_contents(resource_path('views/partials/country.json')));
+        return view($this->activeTemplate . 'user.auth.register', compact('reference','mobileCode', 'pageTitle','countries'));
+    }
 
     public function showRegistrationForm()
     {
