@@ -6,7 +6,12 @@
     $fake_reviews = getContent('fake_review.element');
     $noticeCaption = getContent('notice.content',true);
     $banners = getContent('banner.element');
+    $yourLinks = getContent('links.content', true);
 @endphp
+
+<!-- App download Modal -->
+@include($activeTemplate . 'includes.app_down_modal')
+
 
 <body class="body-scroll d-flex flex-column h-100 menu-overlay" data-page="homepage">
     <!-- Top navbar -->
@@ -367,7 +372,7 @@
 
                         <h5 class="text-dark">Add to <span class="font-weight-bold">Home screen</span></h5>
                         <p class="text-secondary">See  as in fullscreen on your device.</p>
-                        <button class="btn btn-sm btn-default px-4 rounded" id="addtohome">Install</button>
+                        <button data-toggle="modal" data-target="#appDownloadModal" class="btn btn-sm btn-default px-4 rounded" id="addtohome">Install</button>
                     </div>
                 </div>
             </div>

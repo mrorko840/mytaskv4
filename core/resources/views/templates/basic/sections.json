@@ -27,6 +27,21 @@
           "modal": true
       }
    },
+    "links":{
+      "builder":true,
+      "no_selection":true,
+      "name":"Your Links",
+      "content":{
+         "AndroidApps":"text",
+         "AppleApps":"text",
+         "video":"text",
+         "telegram":"text",
+         "images": {
+               "cover_photo": {},
+               "refer_image": {}
+         }
+      }
+   },
      "fake_review":{
       "builder": true,
       "no_selection":true,

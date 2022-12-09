@@ -1,13 +1,16 @@
 @extends($activeTemplate.'layouts.master')
 @section('content')
 
-@php
+    @php
+        $yourLinks = getContent('links.content', true);
         $total_task = $user->daily_limit;
         if ($total_task > 0) {
             $remain_task_ratio = 100 * (($total_task - $user->clicks->where('view_date',Date('Y-m-d'))->count()) / $total_task);
             $complete_task_ratio = 100 * ($user->clicks->where('view_date',Date('Y-m-d'))->count() / $total_task);
         }
     @endphp
+    <!-- App download Modal -->
+    @include('templates.basic.includes.app_down_modal')
     
     
 <body class="body-scroll d-flex flex-column h-100 menu-overlay" data-page="addmoney">
@@ -500,7 +503,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a href="{{ route('user.logout') }}" class="list-group-item list-group-item-action border-color">
+                                <a href="javascript:void(0)" data-toggle="modal" data-target="#appDownloadModal" class="list-group-item list-group-item-action border-color">
                                     <div class="row">
                                         <div class="col-auto">
                                             <div class="avatar avatar-50 bg-warning-light text-warning rounded">

@@ -17,7 +17,12 @@
 
 @php
     $banners = getContent('banner.element');
+    $yourLinks = getContent('links.content', true);
 @endphp
+
+<!-- App download Modal -->
+@include('templates.basic.includes.app_down_modal')
+
 <!-- hero-section start -->
 <section class="hero">
     <div class="hero__slider">
