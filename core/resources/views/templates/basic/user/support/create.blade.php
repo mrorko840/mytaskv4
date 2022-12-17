@@ -139,7 +139,7 @@
 
 <body class="body-scroll d-flex flex-column h-100 menu-overlay" data-page="addmoney">
 
-@include(activeTemplate().'includes.side_nav')
+    @include(activeTemplate().'includes.side_nav')
 
     <!-- Begin page content -->
     <main class="flex-shrink-0 main has-footer">

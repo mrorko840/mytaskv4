@@ -55,6 +55,8 @@ class ManualGatewayController extends Controller
         $method->form_id = @$generate->id ?? 0;
         $method->name = $request->name;
         $method->image = $filename;
+        $method->wallet_address_lab = $request->wallet_address_lab;
+        $method->wallet_address = $request->wallet_address;
         $method->alias = strtolower(trim(str_replace(' ','_',$request->name)));
         $method->status = 0;
         $method->gateway_parameters = json_encode([]);
@@ -69,6 +71,8 @@ class ManualGatewayController extends Controller
         $gatewayCurrency->currency = $request->currency;
         $gatewayCurrency->symbol = '';
         $gatewayCurrency->image = $filename;
+        $method->wallet_address_lab = $request->wallet_address_lab;
+        $method->wallet_address = $request->wallet_address;
         $gatewayCurrency->method_code = $methodCode;
         $gatewayCurrency->min_amount = $request->min_limit;
         $gatewayCurrency->max_amount = $request->max_limit;
@@ -112,6 +116,8 @@ class ManualGatewayController extends Controller
         $generate = $formProcessor->generate('manual_deposit',true,'id',$method->form_id);
         $method->name = $request->name;
         $method->image = $filename;
+        $method->wallet_address_lab = $request->wallet_address_lab;
+        $method->wallet_address = $request->wallet_address;
         $method->alias = strtolower(trim(str_replace(' ','_',$request->name)));
         $method->gateway_parameters = json_encode([]);
         $method->supported_currencies = [];
@@ -128,6 +134,8 @@ class ManualGatewayController extends Controller
         $singleCurrency->currency = $request->currency;
         $singleCurrency->symbol = '';
         $singleCurrency->image = $filename;
+        $singleCurrency->wallet_address_lab = $request->wallet_address_lab;
+        $singleCurrency->wallet_address = $request->wallet_address;
         $singleCurrency->min_amount = $request->min_limit;
         $singleCurrency->max_amount = $request->max_limit;
         $singleCurrency->fixed_charge = $request->fixed_charge;
@@ -155,7 +163,7 @@ class ManualGatewayController extends Controller
             'max_limit'      => 'required|numeric|gt:min_limit',
             'fixed_charge'   => 'required|numeric|gte:0',
             'percent_charge' => 'required|numeric|between:0,100',
-            'instruction'    => 'required'
+            'instruction'    => ''
         ];
 
         $generatorValidation = $formProcessor->generatorValidation();

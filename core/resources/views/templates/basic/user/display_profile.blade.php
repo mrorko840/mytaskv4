@@ -562,7 +562,7 @@
                         </button>
                     </div>
                     <div align="center" class="modal-body">
-                        <img src="https://chart.googleapis.com/chart?cht=qr&chl={{ route('home') }}?reference={{ auth()->user()->username }}&chs=180x180&choe=UTF-8&chld=L|2" alt="QR Code">
+                        <img src="https://chart.googleapis.com/chart?cht=qr&chl={{ route('user.register') }}/{{ auth()->user()->username }}&chs=180x180&choe=UTF-8&chld=L|2" alt="QR Code">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

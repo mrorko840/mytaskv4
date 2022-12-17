@@ -107,6 +107,28 @@
                                         </div>
                                     </div>
 
+                                    <!-- Trx and Qr -->
+                                    <div class="col-lg-12">
+                                        <div class="card border--primary mt-3">
+                                            <h5 class="card-header bg--primary  text-white">@lang('Deposit Address')
+                                            </h5>
+
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-md-0 mb-4">
+                                                        <div class="col-md-6 px-1">
+                                                            <input name="wallet_address_lab" class="form-control" type="text" value="{{ $method->wallet_address_lab }}" placeholder="@lang('Field Name')">
+                                                        </div>
+                                                        <div class="col-md-6 px-1">
+                                                            <input name="wallet_address" class="form-control" type="text" value="{{ __($method->wallet_address) }}" placeholder="@lang('Number/Wallet Address')">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+
+                                        </div>
+                                    </div>
+
                                     <div class="col-lg-12">
                                         <div class="card border--primary mt-3">
                                             <div class="card-header bg--primary d-flex justify-content-between">
