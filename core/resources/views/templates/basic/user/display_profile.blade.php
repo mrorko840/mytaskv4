@@ -27,7 +27,7 @@
                 <div class="card overflow-hidden">
                     <div class="card-body p-0 h-150">
                         <div class="background">
-                            <img src="{{ asset($activeTemplateTrue.'assets/img/image10.jpg') }}" alt="" style="display: none;">
+                            <img src="{{ getImage('assets/images/frontend/links/' . $yourLinks->data_values->cover_photo) }}" alt="" style="display: none;">
                         </div>
                     </div>
                 </div>

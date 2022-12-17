@@ -168,7 +168,7 @@ function imagePath()
     $data['profile'] = [
         'user'=> [
             'path'=>'assets/images/user/profile',
-            'size'=>'350x300'
+            'size'=>'300x300'
         ],
         'admin'=> [
             'path'=>'assets/admin/images/profile',
@@ -576,6 +576,7 @@ function levelCommission($referee, $amount, $commissionType, $trx)
             'trx_type' => '+',
             'details' => ordinal($i) . ' level referral commission from ' . $referee->username,
             'remark' => 'referral_commission',
+            'trx_logo' => 'reffer_logo.png',
             'trx' => $trx,
             'created_at' => now()
         ];

@@ -1,50 +1,190 @@
-
-
+    @auth
     @php
       header('Location: user/login');
       die();
     @endphp
-
-    {{-- @auth
-    @php
-      header('Location: user/login');
-      die();
-    @endphp
-    @endauth --}}
+    @endauth
 
 @extends($activeTemplate.'layouts.frontend')
 @section('content')
-
+@include('templates.basic.liveonline')
 @php
     $banners = getContent('banner.element');
     $yourLinks = getContent('links.content', true);
+    $fake_reviews = getContent('fake_review.element');
+    $noticeCaption = getContent('notice.content',true);
 @endphp
 
 <!-- App download Modal -->
 @include('templates.basic.includes.app_down_modal')
 
-<!-- hero-section start -->
-<section class="hero">
-    <div class="hero__slider">
-      @foreach($banners as $banner)
-      <div class="single__slide bg_img" data-background="{{ asset('assets/images/frontend/banner/'.$banner->data_values->image) }}">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-8">
-              <div class="hero__content text-center">
-                <h2 class="hero__title" data-animation="fadeInUp" data-delay=".3s">{{ __($banner->data_values->heading) }}</h2>
-                <p data-animation="fadeInUp" data-delay=".5s">{{ __($banner->data_values->subheading) }}</p>
-                <div class="btn-group mt-40" data-animation="fadeInUp" data-delay=".7s">
-                </div>
+<body class="body-scroll d-flex flex-column h-100 menu-overlay" data-page="homepage">
+
+  <!-- Begin page content -->
+  <main class="flex-shrink-0 main has-footer">
+      <!-- Fixed navbar -->
+      @include($activeTemplate . 'includes.home.top_nav')
+
+      {{-- <div class="container mt-3 mb-4 text-center">
+          <h2 class="text-white">{{ $general->cur_sym }} {{ showAmount($user->balance) }}</h2>
+          <p class="text-white mb-4">Total Balance</p>
+      </div> --}}
+
+      <div class="main-container">
+
+          <!-- page content start -->
+          <div class="container pb-3">
+              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                  
+                  <div class="carousel-inner border-custom shadow-sm">
+      
+                  @php $i=0; @endphp
+                  @forelse($banners as $item)
+                  @php 
+                  $actives = ''; 
+                  @endphp
+      
+                  @if($i==0)
+                  @php $actives = 'active';@endphp
+                  @endif
+                  @php $i=$i+1; @endphp
+      
+                      <div class="carousel-item <?= $actives ?>">
+                      <img class="d-block w-100" src="{{ getImage('assets/images/frontend/banner/' . $item->data_values->image) }}" alt="banner">
+                      </div>
+                  
+                  @empty
+      
+                  @endforelse
+      
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
               </div>
-            </div>
           </div>
-        </div>
-      </div><!-- single__slide end -->
-      @endforeach
-    </div><!-- hero__slider end -->
-</section>
-  <!-- hero-section end -->
+          <!-- Scroling Notice -->
+          <div class="row pt-1 mx-2 mb-3">
+              <div class="col-12">
+                  <div class="card border-0">
+                      <div class="card-body p-0 px-2">
+                          <div class="row">
+                              <div class="col-auto d-flex align-items-center justify-content-center border-custom bg-warning-light text-warning">
+                                  <span class="material-icons">campaign</span>
+                              </div>
+                              <div class="col align-items-center px-0 mx-0 pt-2">
+                                  <marquee behavior="scroll" direction="left">
+                                      @php 
+                                          echo $noticeCaption->data_values->scrolingNotice; 
+                                      @endphp
+                                  </marquee>
+                              </div>
+                              <div style="font-size: 10px" class="col-auto d-flex align-items-center justify-content-center border-custom bg-default-secondary">
+                                  <span style="font-size: 17px" class="material-icons">groups</span>{{'-'}} <b id="dynamic_counter"></b>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+
+          <!-- PWA add to home display -->
+          <div class="container mb-4">
+              <div class="card" id="addtodevice">
+                  <div class="card-body text-center">
+                      <div class="row mb-3">
+                          <div class="col-10 col-md-4 mx-auto"><img src="{{ asset($activeTemplateTrue . 'assets/img/install-app.png') }}" alt="" class="mw-100"></div>
+                      </div>
+
+                      <h5 class="text-dark">Add to <span class="font-weight-bold">Home screen</span></h5>
+                      <p class="text-secondary">See  as in fullscreen on your device.</p>
+                      <button data-toggle="modal" data-target="#appDownloadModal" class="btn btn-sm btn-default px-4 rounded" id="addtohome">Install</button>
+                  </div>
+              </div>
+          </div>
+          <!-- PWA add to home display -->
+
+          <div class="container mb-4">
+              <div class="card border-0 mb-3">
+                  <div class="card-body">
+                      <div class="row align-items-center">
+                          <div class="col-auto pr-0">
+                              <div class="avatar avatar-50 border-0 bg-danger-light rounded-circle text-danger">
+                                  <i class="material-icons vm text-template">card_giftcard</i>
+                              </div>
+                          </div>
+                          <div class="col-auto align-self-center">
+                              <h6 class="mb-1">3 Gift Cards</h6>
+                              <p class="small text-secondary">Click here to see gift cards</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Swiper Our Reviews-->
+          <div class="container mb-4">
+              <div class="row mb-3">
+                  <div class="col">
+                      <h6 class="subtitle mb-0">Our Reviews</h6>
+                  </div>
+              </div>
+              <div class="swiper-container swiper-users ">
+                  <div class="swiper-wrapper">
+                      @forelse($fake_reviews as $review)
+
+                      <div class="swiper-slide">
+                          <div style="min-height: 180px; width: 320px;" class="card">
+                              <div class="card-body">
+                                  <div class="row">
+                                      <div class="col">
+                                          <div class="avatar avatar-60 rounded mb-1">
+                                              <div class="background"><img src="{{ getImage('assets/images/frontend/fake_review/'.@$review->data_values->image) }}" alt=""></div>
+                                          </div>
+                                          <p class="text-secondary mb-0"><small>{{ @$review->data_values->name }}</small></p>
+                                      </div>
+                                  </div>
+
+                                  <div class="row">
+
+                                      <div class="col ">
+                                          <p class="mb-1">{{@$review->data_values->review_text}}<small class="text-success" hidden>28% <span class="material-icons small" hidden>call_made</span></small></p>
+                                          <p class="text-secondary small">{{ showDateTime(@$review->updated_at, 'd-m-Y, h:i a') }}</p>
+                                      </div>
+                                  </div>
+
+                              </div>
+                          </div>
+                      </div>
+
+                      @empty
+
+                      @endforelse
+                      
+                  </div>
+              </div>
+          </div>
+
+
+          
+          
+
+      </div>
+  </main>
+
+  <!-- footer-->
+  @include($activeTemplate . 'includes.home.bottom_nav')
+
+
+  
+</body>
 
     @if($sections->secs != null)
         @foreach(json_decode($sections->secs) as $sec)
