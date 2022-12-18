@@ -104,7 +104,7 @@
         </div>
 
         <div class="main-container">
-            <!-- page content start -->
+            <!-- Scroling Banner -->
             <div class="container pb-3">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     
@@ -143,23 +143,30 @@
             
 
 
-            <div class="row pt-1 mx-2 mb-3">
-                <div class="col-12">
-                    <div class="card border-0">
-                        <div class="card-body p-0 px-2">
-                            <div class="row">
-                                <div class="col-auto d-flex align-items-center justify-content-center border-custom bg-warning-light text-warning">
-                                    <span class="material-icons">campaign</span>
-                                </div>
-                                <div class="col align-items-center px-0 mx-0 pt-2">
-                                    <marquee behavior="scroll" direction="left">
-                                        @php 
-                                            echo $noticeCaption->data_values->scrolingNotice; 
-                                        @endphp
-                                    </marquee>
-                                </div>
-                                <div style="font-size: 10px" class="col-auto d-flex align-items-center justify-content-center border-custom bg-default-secondary">
-                                    <span style="font-size: 17px" class="material-icons">groups</span>{{'-'}} <b id="dynamic_counter"></b>
+            <!-- Scroling Notice -->
+            <div class="container mb-3">
+                <div class="row mx-0">
+                    <div class="col-12">
+                        <div class="card border-0">
+                            <div class="card-body p-0">
+                                <div class="row">
+                                    <div
+                                        class="col-auto d-flex align-items-center justify-content-center border-custom bg-warning-light text-warning">
+                                        <span class="material-icons">campaign</span>
+                                    </div>
+                                    <div class="col align-items-center px-0 mx-0 pt-1">
+                                        <marquee behavior="scroll" direction="left">
+                                            @php
+                                                echo $noticeCaption->data_values->scrolingNotice;
+                                            @endphp
+                                        </marquee>
+                                    </div>
+                                    <div style="font-size: 10px"
+                                        class="col-auto d-flex align-items-center justify-content-center border-custom bg-default-secondary">
+                                        <span style="font-size: 17px"
+                                            class="material-icons pr-1">groups</span>
+                                            <b id="dynamic_counter"></b>
+                                    </div>
                                 </div>
                             </div>
                         </div>

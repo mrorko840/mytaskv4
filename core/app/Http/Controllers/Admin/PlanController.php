@@ -23,6 +23,7 @@ class PlanController extends Controller
             'name' => 'required',
             'price' => 'required|numeric|min:0',
             'daily_limit' => 'required|numeric|min:1',
+            'ads_rate' => 'required|numeric',
             'ref_level' => 'required|numeric|min:0',
             'validity' => 'required|min:0',
         ]);
@@ -35,6 +36,7 @@ class PlanController extends Controller
         $plan->name = $request->name;
         $plan->price = $request->price;
         $plan->daily_limit = $request->daily_limit;
+        $plan->ads_rate = $request->ads_rate;
         $plan->ref_level = $request->ref_level;
         $plan->validity = $request->validity;
         $plan->status = isset($request->status) ? 1:0;

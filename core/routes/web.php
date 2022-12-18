@@ -39,8 +39,10 @@ Route::controller('SiteController')->group(function () {
 
     Route::get('plans', 'SiteController@plans')->name('plans');
 
-    Route::get('blog', 'SiteController@blog')->name('blog');
-    Route::get('blog-details/{id}', 'SiteController@blogDetail')->name('blogDetail');
+    Route::get('income-guide', 'SiteController@income_guide')->name('income.guide');
+
+    Route::get('news', 'SiteController@blog')->name('blog');
+    Route::get('news-details/{id}', 'SiteController@blogDetail')->name('blogDetail');
 
     Route::get('/{slug}', 'pages')->name('pages');
     Route::get('/', 'index')->name('home');

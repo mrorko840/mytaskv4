@@ -1,5 +1,6 @@
 @extends('admin.layouts.app')
 @section('panel')
+
 <div class="row mb-none-30">
   <div class="col-md-12">
     <div class="card">
@@ -11,6 +12,7 @@
                             <th scope="col">@lang('Name')</th>
                             <th scope="col">@lang('Price')</th>
                             <th scope="col">@lang('Limit/Day')</th>
+                            <th scope="col">@lang('Ads Rate')</th>
                             <th scope="col">@lang('Validity')</th>
                             <th scope="col">@lang('Referral Commission')</th>
                             <th scope="col">@lang('Status')</th>
@@ -22,8 +24,8 @@
                         <tr>
                             <td data-label="@lang('Name')">{{$plan->name}}</td>
                             <td data-label="@lang('Price')" class="font-weight-bold">{{ showAmount($plan->price) }} {{$general->cur_text}}</td>
-
-                            <td data-label="@lang('Limit/Day')">{{ $plan->daily_limit}} @lang('PTC')</td>
+                            <td data-label="@lang('Limit/Day')">{{ $plan->daily_limit}} @lang('Ads')</td>
+                            <td data-label="@lang('Ads Rate')">{{$general->cur_sym}} {{ showAmount($plan->ads_rate)}}</td>
                             <td data-label="@lang('Validity')">{{ $plan->validity}} @lang('Day')</td>
                             <td data-label="@lang('Referral Commission')">@lang('up to') <span class="font-weight-bold text-primary px-3">{{ $plan->ref_level }} </span>@lang('level')</td>
                             <td data-label="@lang('Status')">
@@ -36,7 +38,7 @@
                                 @endif
                             </td>
                             <td data-label="@lang('Action')">
-                                <button class="btn btn-outline--primary btn-sm planBtn" data-id="{{ $plan->id }}" data-name="{{ $plan->name }}" data-price="{{ getAmount($plan->price) }}" data-daily_limit="{{ $plan->daily_limit }}" data-validity="{{ $plan->validity }}" data-status="{{ $plan->status }}" data-ref_level="{{ $plan->ref_level}}" data-act="Edit">
+                                <button class="btn btn-outline--primary btn-sm planBtn" data-id="{{ $plan->id }}" data-name="{{ $plan->name }}" data-price="{{ getAmount($plan->price) }}" data-daily_limit="{{ $plan->daily_limit }}" data-ads_rate="{{ getAmount($plan->ads_rate) }}" data-validity="{{ $plan->validity }}" data-status="{{ $plan->status }}" data-ref_level="{{ $plan->ref_level}}" data-act="Edit">
                                     <i class="la la-pencil"></i> @lang('Edit')
                                 </button>
                             </td>
@@ -81,6 +83,13 @@
                     <div class="form-group">
                         <label for="daily_limit">@lang('Daily Ad Limit')</label>
                         <input type="number" class="form-control" name="daily_limit" placeholder="@lang('Daily Ad Limit')" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ads_rate">@lang('Per Ads Rate')</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="ads_rate" placeholder="@lang('Per Ads Rate')" required>
+                            <div class="input-group-text">{{ $general->cur_text }}</div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="daily_limit">@lang('Validity')</label>
@@ -128,6 +137,7 @@
             modal.find('input[name=name]').val($(this).data('name'));
             modal.find('input[name=price]').val($(this).data('price'));
             modal.find('input[name=daily_limit]').val($(this).data('daily_limit'));
+            modal.find('input[name=ads_rate]').val($(this).data('ads_rate'));
             modal.find('input[name=validity]').val($(this).data('validity'));
             modal.find('input[name=status]').bootstrapToggle($(this).data('status') == 1 ? 'on' : 'off');
             modal.find('select[name=ref_level]').val($(this).data('ref_level'));

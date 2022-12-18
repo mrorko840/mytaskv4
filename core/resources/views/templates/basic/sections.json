@@ -192,11 +192,9 @@
         "no_selection":true,
         "name":"Contact",
         "content":{
-           "heading":"text",
-           "subheading":"text"
+           "heading":"text"
         },
         "element":{
-           "icon":"icon",
            "title":"text",
            "content":"text",
            "modal":true

@@ -44,6 +44,13 @@
             background: #560087 !important;
             color: #FFF;
         }
+        .text-purple {
+            color: #560087 !important;
+        }
+
+        .bg-purple-light {
+            background-color: #fae0ff !important;
+        }
 
         .bg-orange {
             background: #f76000 !important;

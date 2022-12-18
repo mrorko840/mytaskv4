@@ -24,10 +24,17 @@ class SiteController extends Controller
         $sections = Page::where('tempname',$this->activeTemplate)->where('slug','/')->first();
         return view($this->activeTemplate . 'home', compact('pageTitle','sections'));
     }
+    public function income_guide()
+    {
+        $pageTitle = 'Income Guide';
+        $plans = Plan::where('status',1)->get();
+        $user = auth()->user();
+        return view($this->activeTemplate.'income_guide', compact('pageTitle','plans','user'));
+    }
 
     public function blog()
     {
-        $pageTitle = 'Blog';
+        $pageTitle = 'News';
         $sections = Page::where('tempname',$this->activeTemplate)->where('slug','blog')->firstOrFail();
         $blogs = Frontend::where('data_keys','blog.element')->orderBy('id','desc')->paginate(getPaginate());
         return view($this->activeTemplate.'blog.blogs', compact('pageTitle','sections','blogs'));
