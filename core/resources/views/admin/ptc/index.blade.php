@@ -92,6 +92,7 @@
                                         href="{{ route('admin.ptc.edit', $ptc->id) }}"><i
                                             class="la la-pen"></i> @lang('Edit')</a></td>
                             </tr>
+                            @break
                             @endif
                         @endforeach
                     @empty
