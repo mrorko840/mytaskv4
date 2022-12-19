@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ptc;
+use App\Models\Plan;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -13,35 +14,40 @@ class ManagePtcController extends Controller
     {
         $pageTitle = 'PTC Advertisements';
         $ads = $this->ptcData();
-        return view('admin.ptc.index', compact('pageTitle', 'ads'));
+        $plans = Plan::get();
+        return view('admin.ptc.index', compact('pageTitle', 'ads', 'plans'));
     }
 
     public function pending()
     {
         $pageTitle = 'Pending PTC Advertisements';
+        $plans = Plan::get();
         $ads = $this->ptcData('pending');
-        return view('admin.ptc.index', compact('pageTitle', 'ads'));
+        return view('admin.ptc.index', compact('pageTitle', 'ads', 'plans'));
     }
 
     public function active()
     {
         $pageTitle = 'Active PTC Advertisements';
+        $plans = Plan::get();
         $ads = $this->ptcData('active');
-        return view('admin.ptc.index', compact('pageTitle', 'ads'));
+        return view('admin.ptc.index', compact('pageTitle', 'ads', 'plans'));
     }
 
     public function inactive()
     {
         $pageTitle = 'Inactive PTC Advertisements';
+        $plans = Plan::get();
         $ads = $this->ptcData('inactive');
-        return view('admin.ptc.index', compact('pageTitle', 'ads'));
+        return view('admin.ptc.index', compact('pageTitle', 'ads', 'plans'));
     }
 
     public function rejected()
     {
         $pageTitle = 'Rejected PTC Advertisements';
+        $plans = Plan::get();
         $ads = $this->ptcData('rejected');
-        return view('admin.ptc.index', compact('pageTitle', 'ads'));
+        return view('admin.ptc.index', compact('pageTitle', 'ads', 'plans'));
     }
 
     private function ptcData($scope = null)
@@ -58,14 +64,16 @@ class ManagePtcController extends Controller
     public function create(Request $request)
     {
         $pageTitle = 'Add Advertisement';
-        return view('admin.ptc.create', compact('pageTitle'));
+        $plans = Plan::get();
+        return view('admin.ptc.create', compact('pageTitle', 'plans'));
     }
 
     public function edit(Request $request, $id)
     {
         $pageTitle = 'Edit Advertisement';
+        $plans = Plan::get();
         $ptc = Ptc::findOrFail($id);
-        return view('admin.ptc.edit', compact('pageTitle', 'ptc'));
+        return view('admin.ptc.edit', compact('pageTitle', 'ptc', 'plans'));
     }
 
     public function store(Request $request)
@@ -78,7 +86,8 @@ class ManagePtcController extends Controller
         ]);
 
         $ptc = new Ptc();
-        $this->submit($request, $ptc);
+        $plan = Plan::where('status', 1)->findOrFail($request->plan_id);
+        $this->submit($request, $ptc, $plan);
         $notify[] = ['success', 'Advertisement added successfully.'];
         return back()->withNotify($notify);
     }
@@ -87,16 +96,18 @@ class ManagePtcController extends Controller
     {
         $this->validation($request);
         $ptc = Ptc::findOrFail($id);
-        $this->submit($request, $ptc, 1);
+        $plan = Plan::where('status', 1)->findOrFail($request->plan_id);
+        $this->submit($request, $ptc, $plan, 1);
         $notify[] = ['success', 'Advertisement updated successfully.'];
         return back()->withNotify($notify);
     }
 
 
-    public function submit($request, $ptc, $isUpdate = 0)
+    public function submit($request, $ptc, $plan, $isUpdate = 0)
     {
         $ptc->title = $request->title;
-        $ptc->amount = $request->amount;
+        $ptc->plan_id = $request->plan_id;
+        $ptc->amount = $plan->ads_rate;
         $ptc->duration = $request->duration;
         $ptc->max_show = $request->max_show;
         if (!$isUpdate) {
@@ -183,7 +194,7 @@ class ManagePtcController extends Controller
     {
         $globalRules = [
             'title' => 'required',
-            'amount' => 'required|numeric|min:0',
+            'plan_id' => 'required',
             'duration' => 'required|numeric|min:1',
             'max_show' => 'required|numeric|min:1',
             'ads_type' => 'required|integer',

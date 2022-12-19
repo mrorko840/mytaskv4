@@ -1,5 +1,11 @@
 @extends($activeTemplate . 'layouts.frontend')
 @section('content')
+    @guest
+        @php
+            header('Location: user/login');
+            die();
+        @endphp
+    @endguest
 
 <body class="body-scroll d-flex flex-column h-100 menu-overlay" data-page="addmoney">
     <!-- Top navbar -->

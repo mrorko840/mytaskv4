@@ -12,13 +12,26 @@
                         <input type="text" name="title" class="form-control" value="{{ $ptc->title }}" placeholder="@lang('Title')" required>
                     </div>
 
+                    <!-- Ads Plan ID -->
                     <div class="form-group col-md-4">
+                        <label>@lang('Select Plan')</label>
+                        <select class="form-control" name="plan_id" required>
+                            <option value="">@lang('Select One')</option>
+
+                            @foreach($plans as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+
+                        </select>
+                    </div>
+
+                    {{-- <div class="form-group col-md-4">
                         <label>@lang('Amount')</label>
                         <div class="input-group">
                             <input type="number" step="any" name="amount" class="form-control" value="{{ getAmount($ptc->amount) }}" placeholder="@lang('User will get ...')" required>
                             <div class="input-group-text"> {{ $general->cur_text }} </div>
                         </div>
-                    </div>
+                    </div> --}}
 
 
                     <div class="form-group col-md-4">
@@ -138,6 +151,7 @@
         }).change();
 
         $('[name=status]').val('{{ $ptc->status }}');
+        $('[name=plan_id]').val('{{ $ptc->plan_id }}');
     })(jQuery);
 </script>
 @endpush

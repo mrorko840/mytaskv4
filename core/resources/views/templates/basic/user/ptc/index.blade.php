@@ -39,7 +39,7 @@
                         <div class="mt-4">
                             
                             @forelse($ads as $ad)
-                                @if($ad->ads_type == 4)
+                                @if($ad->ads_type == 4 && $ad->plan_id == $user->plan_id)
                                     <div class="container">
                                         <div class="card mb-4">
                                             <div class="card-header">
@@ -88,7 +88,7 @@
                         <div class="mt-4">
                             
                             @forelse($ads as $ad)
-                                @if($ad->ads_type == 1)
+                                @if($ad->ads_type == 1 && $ad->plan_id == $user->plan_id)
                                     <div class="container">
                                         <div class="card mb-4">
                                             <div class="card-header">
