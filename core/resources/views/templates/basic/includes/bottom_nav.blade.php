@@ -4,7 +4,7 @@
           <div class="col-auto">
               <a href="{{ route('home') }}" class="{{ request()->path() == 'user/dashboard' ? 'active' : '' }}">
                   <i class="material-icons">home</i>
-                  <p>Home</p>
+                  <p>Dashboard</p>
               </a>
           </div>
           <div class="col-auto">

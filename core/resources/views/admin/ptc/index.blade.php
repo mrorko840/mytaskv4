@@ -47,15 +47,14 @@
                     @forelse($ads as $ptc)
                         @foreach ($plans as $plan)
                             @if ($plan->id == $ptc->plan_id)
-                            <tr id="{{ str_replace(' ', '', $plan->name) }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <tr id="{{ str_replace(' ', '', $plan->name) }}" class="collapse active" aria-labelledby="{{ str_replace(' ', '', $plan->name) }}" data-parent="#accordionExample">
                                 <td data-label="@lang('Title')">{{ strLimit($ptc->title, 20) }}</td>
                                 <td data-label="@lang('Posted By')">
                                     @if ($ptc->user)
                                         <span class="fw-bold">{{ $ptc->user->fullname }}</span>
                                         <br>
                                         <span class="small">
-                                            <a
-                                                href="{{ route('admin.users.detail', $ptc->user_id) }}"><span>@</span>{{ $ptc->user->username }}</a>
+                                            <a href="{{ route('admin.users.detail', $ptc->user_id) }}"><span>@</span>{{ $ptc->user->username }}</a>
                                         </span>
                                     @else
                                         <span class="fw-bold">@lang('Admin')</span>

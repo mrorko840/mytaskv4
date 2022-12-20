@@ -42,7 +42,7 @@ class SiteController extends Controller
 
     public function blogDetail($id)
     {
-        $pageTitle = "Blog Details";
+        $pageTitle = "News Details";
         $blog = Frontend::where('data_keys','blog.element')->findOrFail($id);
         $blog->increment('view');
         $latests = Frontend::where('data_keys','blog.element')->orderBy('id','desc')->limit(5)->get();

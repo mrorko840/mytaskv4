@@ -136,14 +136,18 @@
 </style>
 
 <body class="body-scroll d-flex flex-column h-100 menu-overlay" data-page="addmoney">
-
+    @auth
     @include(activeTemplate().'includes.side_nav')
-
+    @endauth
     <!-- Begin page content -->
     <main class="flex-shrink-0 main has-footer">
         <!-- Fixed navbar -->
+        @auth
         @include(activeTemplate().'includes.top_nav')
-
+        @endauth
+        @guest
+        @include(activeTemplate().'includes.home.top_nav_mini')
+        @endguest
         
         <div class="main-container">
             <div class="row justify-content-center">

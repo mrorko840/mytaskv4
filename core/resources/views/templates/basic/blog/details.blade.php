@@ -13,7 +13,7 @@
         <!-- Begin page content -->
         <main class="flex-shrink-0 main has-footer">
             <!-- Fixed navbar -->
-            @include($activeTemplate . 'includes.home.top_nav')
+            @include($activeTemplate . 'includes.home.top_nav_mini')
 
             <div class="main-container">
 

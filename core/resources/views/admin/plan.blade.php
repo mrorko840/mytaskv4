@@ -14,7 +14,7 @@
                             <th scope="col">@lang('Limit/Day')</th>
                             <th scope="col">@lang('Ads Rate')</th>
                             <th scope="col">@lang('Validity')</th>
-                            <th scope="col">@lang('Referral Commission')</th>
+                            <th scope="col" hidden>@lang('Referral Commission')</th>
                             <th scope="col">@lang('Status')</th>
                             <th scope="col">@lang('Action')</th>
                         </tr>
@@ -27,7 +27,7 @@
                             <td data-label="@lang('Limit/Day')">{{ $plan->daily_limit}} @lang('Ads')</td>
                             <td data-label="@lang('Ads Rate')">{{$general->cur_sym}} {{ showAmount($plan->ads_rate)}}</td>
                             <td data-label="@lang('Validity')">{{ $plan->validity}} @lang('Day')</td>
-                            <td data-label="@lang('Referral Commission')">@lang('up to') <span class="font-weight-bold text-primary px-3">{{ $plan->ref_level }} </span>@lang('level')</td>
+                            <td data-label="@lang('Referral Commission')" hidden>@lang('up to') <span class="font-weight-bold text-primary px-3">{{ $plan->ref_level }} </span>@lang('level')</td>
                             <td data-label="@lang('Status')">
                                 @if($plan->status == 1)
                                     <span class="badge badge--success">@lang('Active')</span>
