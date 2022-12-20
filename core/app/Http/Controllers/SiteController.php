@@ -60,7 +60,7 @@ class SiteController extends Controller
 
     public function plans()
     {
-        $pageTitle = 'Plans';
+        $pageTitle = 'Membership Plans';
         $plans = Plan::where('status',1)->get();
         $user = auth()->user();
         return view($this->activeTemplate.'plans', compact('pageTitle','plans', 'user'));
