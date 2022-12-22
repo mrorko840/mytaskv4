@@ -19,7 +19,6 @@
                     <i style="font-size: 30px; width: 40px;" class="material-icons">diamond</i>
                 </div>
                 
-                {{-- <p>Membership</p> --}}
               </a>
           </div>
           <div class="col-auto">

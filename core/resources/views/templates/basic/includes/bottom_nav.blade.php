@@ -15,11 +15,10 @@
           </div>
           <div class="col-auto">
               <a href="{{ route('plans') }}" class="{{ request()->path() == 'plans' ? '' : '' }}">
-                <div style="height: 56px; width: 56px; margin-top: -23px;" class="bg-default-light text-default rounded-circle shadow d-flex align-items-center">
+                <div style="height: 56px; width: 56px; margin-top: -23px;" class="{{ request()->path() == 'plans' ? 'bg-default-light text-default' : 'bg-default-light text-default' }}  rounded-circle shadow d-flex align-items-center">
                     <i style="font-size: 30px; width: 40px;" class="material-icons">diamond</i>
                 </div>
                 
-                {{-- <p>Membership</p> --}}
               </a>
           </div>
           <div class="col-auto">

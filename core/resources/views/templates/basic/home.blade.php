@@ -1,6 +1,6 @@
     @auth
         @php
-            header('Location: user/login');
+            header('Location: user/dashboard');
             die();
         @endphp
     @endauth

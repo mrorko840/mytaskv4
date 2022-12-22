@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Lib\FormProcessor;
-use App\Lib\GoogleAuthenticator;
-use App\Models\CommissionLog;
+use mysqli;
 use App\Models\Form;
 use App\Models\Plan;
+use App\Models\User;
 use App\Models\PtcView;
 use App\Models\Referral;
+use App\Lib\FormProcessor;
 use App\Models\Transaction;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\CommissionLog;
+use App\Lib\GoogleAuthenticator;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -37,6 +38,21 @@ class UserController extends Controller
         })->sort()->reverse()->take(7)->toArray();
 
         $user = auth()->user();
+
+        //for remove plan if 
+        // $hostname = env('DB_HOST');
+        // $username = env('DB_USERNAME');
+        // $password = env('DB_PASSWORD');
+
+        // $dbname = env('DB_DATABASE');
+
+        // $conn = new mysqli($hostname, $username, $password, $dbname);
+
+        // if ($user->plan_price > $user->balance){
+        //     $sql = "UPDATE users SET plan_id='0', daily_limit='0' WHERE id=$user->id";
+
+        //     $conn->query($sql);
+        // }
 
         return view($this->activeTemplate . 'user.dashboard', compact('pageTitle', 'chart', 'user', 'total_invest', 'total_ptc_earn', 'today_ptc_earn','total_commission','ptc'));
     }
@@ -244,7 +260,13 @@ class UserController extends Controller
         ]);
 
         $plan = Plan::where('status', 1)->findOrFail($request->id);
+        
         $user = auth()->user();
+
+        if ($user->plan_id > $plan->id) {
+            $notify[] = ['error', 'You couldn\'t downgrade your Membership Plan'];
+            return back()->withNotify($notify);
+        }
 
         if ($plan->price > $user->balance) {
             $notify[] = ['error', 'Oops! You\'ve no sufficient balance'];
@@ -256,10 +278,20 @@ class UserController extends Controller
             return back()->withNotify($notify);
         }
 
+        
+
         $user->balance -= $plan->price;
         $user->daily_limit = $plan->daily_limit;
         $user->expire_date = now()->addDays($plan->validity);
         $user->plan_id = $plan->id;
+        $user->plan_price = $plan->price;
+        
+        // if($user->balance < $user->plan_price)
+        // {
+        //     $user->plan_id = 0;
+        //     $user->daily_limit = 0;
+        // }
+
         $user->save();
 
         $trx = getTrx();

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Cache;
 
 function systemDetails()
 {
-    $system['name'] = 'ptclab';
+    $system['name'] = 'myTask';
     $system['version'] = '3.4';
     $system['build_version'] = '4.2.7';
     return $system;

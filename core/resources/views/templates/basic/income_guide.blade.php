@@ -65,6 +65,5 @@
     @include($activeTemplate . 'includes.home.bottom_nav')
 
 
-
 </body>
 @endsection

@@ -195,6 +195,24 @@
 </style>
 @endpush
 @push('script')
+    <script>
+        "use strict";
+
+        $('.main-wrapper').addClass('section--bg');
+
+        "use strict";
+
+        const copyRefLink = () => {
+            var copyText = document.getElementById("link");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+            notify('success', "Copied: " + copyText.value);
+        }
+    </script>
+@endpush
+
+{{-- @push('script')
 <script type="text/javascript">
     (function ($) {
         "use strict";
@@ -208,4 +226,6 @@
         });
     })(jQuery);
 </script>
-@endpush
+@endpush --}}
+
+
