@@ -13,7 +13,8 @@ class ManagePtcController extends Controller
     public function index()
     {
         $pageTitle = 'PTC Advertisements';
-        $ads = $this->ptcData();
+        // $ads = $this->ptcData();
+        $ads = Ptc::orderBy('id', 'desc')->get();
         $plans = Plan::get();
         return view('admin.ptc.index', compact('pageTitle', 'ads', 'plans'));
     }
@@ -22,7 +23,8 @@ class ManagePtcController extends Controller
     {
         $pageTitle = 'Pending PTC Advertisements';
         $plans = Plan::get();
-        $ads = $this->ptcData('pending');
+        // $ads = $this->ptcData('pending');
+        $ads = Ptc::where('status', 2)->orderBy('id', 'desc')->get();
         return view('admin.ptc.index', compact('pageTitle', 'ads', 'plans'));
     }
 
@@ -30,7 +32,8 @@ class ManagePtcController extends Controller
     {
         $pageTitle = 'Active PTC Advertisements';
         $plans = Plan::get();
-        $ads = $this->ptcData('active');
+        // $ads = $this->ptcData('active');
+        $ads = Ptc::where('status', 1)->orderBy('id', 'desc')->get();
         return view('admin.ptc.index', compact('pageTitle', 'ads', 'plans'));
     }
 
@@ -38,7 +41,8 @@ class ManagePtcController extends Controller
     {
         $pageTitle = 'Inactive PTC Advertisements';
         $plans = Plan::get();
-        $ads = $this->ptcData('inactive');
+        // $ads = $this->ptcData('inactive');
+        $ads = Ptc::where('status', 0)->orderBy('id', 'desc')->get();
         return view('admin.ptc.index', compact('pageTitle', 'ads', 'plans'));
     }
 
@@ -46,7 +50,8 @@ class ManagePtcController extends Controller
     {
         $pageTitle = 'Rejected PTC Advertisements';
         $plans = Plan::get();
-        $ads = $this->ptcData('rejected');
+        // $ads = $this->ptcData('rejected');
+        $ads = Ptc::where('status', 3)->orderBy('id', 'desc')->get();
         return view('admin.ptc.index', compact('pageTitle', 'ads', 'plans'));
     }
 

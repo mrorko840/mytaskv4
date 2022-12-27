@@ -2,6 +2,7 @@
 @section('content')
     
 <style>
+    
     .custom-select {
         display: inline-block;
         width: 100%;

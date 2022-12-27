@@ -15,7 +15,7 @@
         </div>
     </div> --}}
 
-    <div class="accordion" id="accordionExample">
+    {{-- <div class="accordion" id="accordionExample">
         <div class="card">
 
             <div class="card-header" id="">
@@ -104,7 +104,7 @@
 
         </div>
         
-    </div>
+    </div> --}}
 
     {{-- <div class="row">
         <div class="col-md-12">
@@ -127,12 +127,12 @@
                                     <th scope="col">@lang('Action')</th>
                                 </tr>
                             </thead>
-                            <tbody id="headingOne">
+                            <tbody>
 
                                 @forelse($ads as $ptc)
                                     @foreach ($plans as $plan)
                                         @if ($plan->id == $ptc->plan_id)
-                                            <tr id="{{ str_replace(' ', '', $plan->name) }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                            <tr id="{{ str_replace(' ', '', $plan->name) }}" class="collapse active" aria-labelledby="{{ str_replace(' ', '', $plan->name) }}" data-parent="#accordionExample">
                                                 <td data-label="@lang('Title')">{{ strLimit($ptc->title, 20) }}</td>
                                                 <td data-label="@lang('Posted By')">
                                                     @if ($ptc->user)
@@ -156,7 +156,6 @@
                                                             {{ $plan->name }}
                                                         @endif
                                                     @endforeach
-
                                                 </td>
 
                                                 <td data-label="@lang('Duration')">{{ $ptc->duration }} @lang('Sec')
@@ -172,10 +171,12 @@
                                                 <td data-label="@lang('Status')">
                                                     @php echo $ptc->statusBadge @endphp
                                                 </td>
-                                                <td data-label="@lang('Action')"><a
-                                                        class="btn btn-outline--primary btn-sm"
+                                                <td data-label="@lang('Action')">
+                                                    <a class="btn btn-outline--primary btn-sm"
                                                         href="{{ route('admin.ptc.edit', $ptc->id) }}"><i
-                                                            class="la la-pen"></i> @lang('Edit')</a></td>
+                                                            class="la la-pen"></i> @lang('Edit')
+                                                        </a>
+                                                        </td>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -197,6 +198,93 @@
             </div>
         </div>
     </div> --}}
+
+    <ul class="nav nav-tabs justify-content-left" id="myTab" role="tablist">
+        @foreach($plans as $plan)
+        <li class="nav-item">
+            <a style="background-color: #fff0;" class="nav-link  bg-info mx-1" id="yt-tab" data-toggle="tab" href="#{{ str_replace(' ', '', $plan->name) }}" role="tab"
+                aria-controls="{{ str_replace(' ', '', $plan->name) }}" aria-selected="true">{{ $plan->name }}</a>
+        </li>
+        @endforeach
+
+    </ul>
+    
+    <div class="tab-content" id="myTabContent">
+        @foreach($ads as $ptc)
+            @foreach ($plans as $plan)
+            <tr>
+                <div class="tab-pane fade" id="{{ str_replace(' ', '', $plan->name) }}" role="tabpanel" aria-labelledby="yt-tab">
+                    @foreach($ads as $ptc)
+                    @if ($plan->id == $ptc->plan_id)
+
+                    <div class="card my-2">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col-auto pr-0">
+                                    <div class="avatar avatar-50 rounded">
+                                        <div class="background">
+                                            @if ($ptc->ads_type == 4)
+                                                <img width="50px" height="50px" src="{{ asset($activeTemplateTrue . '/assets/img/services/yt_logo.png') }}" alt="">
+                                            @elseif ($ptc->ads_type == 1)
+                                                <img width="50px" height="50px" src="{{ asset($activeTemplateTrue . '/assets/img/services/web_logo.png') }}" alt="">
+                                            @elseif ($ptc->ads_type == 2)
+                                                <img width="50px" height="50px" src="{{ asset($activeTemplateTrue . '/assets/img/services/image_logo.png') }}" alt="">
+                                            @elseif ($ptc->ads_type == 3)
+                                                <img width="50px" height="50px" src="{{ asset($activeTemplateTrue . '/assets/img/services/code_logo.png') }}" alt="">
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="col align-self-center pr-0">
+                                    <h6 class="font-weight-normal mb-1"> {{ strLimit($ptc->title, 20) }}</h6>
+                                    <p class="small text-secondary">
+                                        Only for 
+                                        <span class="text-info">
+                                            @if ($plan->id == $ptc->plan_id)
+                                                {{ $plan->name }}
+                                            @endif
+                                        </span>
+                                        <br>
+                                        Duration: <span class="text-warning">{{ $ptc->duration }} @lang('Sec')</span>
+                                    </p>
+                                    
+                                    
+                                </div>
+          
+                                <div class="col-auto text-center">
+    
+                                    <h6 class="text-danger">
+                                        {{ showAmount($ptc->amount) }} {{ $general->cur_text }}
+                                    </h6>
+
+                                    @php echo $ptc->statusBadge @endphp
+                                    <br>
+
+                                    <a class="badge badge--warning mt-1" href="{{ route('admin.ptc.edit', $ptc->id) }}">
+                                        <i class="la la-pen"></i> @lang('Edit')
+                                    </a>
+    
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+
+                    @endif
+                    @endforeach
+                    
+                </div>
+            </tr>
+                
+
+            @endforeach
+        @endforeach
+            
+    </div>
+
+
+
 @endsection
 @push('breadcrumb-plugins')
     <a href="{{ route('admin.ptc.create') }}" class="btn btn-outline--primary btn-sm"><i class="las la-plus"></i>

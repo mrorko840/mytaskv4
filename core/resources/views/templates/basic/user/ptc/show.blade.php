@@ -13,7 +13,8 @@
     <script src="{{ asset('assets/global/js/jquery-3.6.0.min.js') }}"></script>
     <title> {{ $general->sitename(__($pageTitle)) }}</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <script>
+    
+    {{-- <script>
         document.addEventListener('visibilitychange', function() {
             if (document.visibilityState === 'hidden') {
                 document.body.innerHTML = `
@@ -23,7 +24,8 @@
                     `;
             }
         });
-    </script>
+    </script> --}}
+
     <style>
         #myProgress {
             width: 100%;
@@ -147,6 +149,10 @@
                 top: 202px !important;
             }
         }
+
+        .border-custom {
+            border-radius: 1.3rem !important;
+        }
     </style>
 </head>
 
@@ -239,10 +245,8 @@
                 @php echo $ptc->ads_body @endphp
             </div>
         @else
-            <div class="d-flex justify-content-center">
-                <div class="iframe-container">
-                    <iframe src="{{ $ptc->ads_body }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+            <div class="d-flex justify-content-center mt-3">
+                    <iframe class="border-custom" src="{{ $ptc->ads_body }}?autoplay=1&mute=1" title="YouTube video player" width="93%" height="270px" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         @endif
     </div>

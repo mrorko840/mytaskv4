@@ -14,6 +14,44 @@
                     </a>
                 </li>
 
+                <li class="sidebar-menu-item sidebar-dropdown">
+                    <a href="javascript:void(0)" class="{{menuActive('admin.frontend.sections*',3)}}">
+                        <i class="menu-icon la la-tools"></i>
+                        <span class="menu-title">@lang('Frontend Items')</span>
+                    </a>
+                    <div class="sidebar-submenu {{menuActive('admin.frontend.sections*',2)}} ">
+                        <ul>
+                            @php
+                               $lastSegment =  collect(request()->segments())->last();
+                            @endphp
+                            <li class="sidebar-menu-item {{ request()->path() == 'admin/frontend/frontend-sections/notice' ? 'active' : '' }}">
+                                <a href="{{route('admin.frontend.sections', 'notice')}}" class="nav-link ">
+                                    <i class="menu-icon las la-dot-circle"></i>
+                                    <span class="menu-title">@lang('Notice Board')</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item {{ request()->path() == 'admin/frontend/frontend-sections/banner' ? 'active' : '' }}">
+                                <a href="{{route('admin.frontend.sections', 'banner')}}" class="nav-link ">
+                                    <i class="menu-icon las la-dot-circle"></i>
+                                    <span class="menu-title">@lang('Sliding Banner')</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item {{ request()->path() == 'admin/frontend/frontend-sections/links' ? 'active' : '' }}">
+                                <a href="{{route('admin.frontend.sections', 'links')}}" class="nav-link ">
+                                    <i class="menu-icon las la-dot-circle"></i>
+                                    <span class="menu-title">@lang('Importent Links')</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-menu-item {{ request()->path() == 'admin/frontend/frontend-sections/fake_review' ? 'active' : '' }}">
+                                <a href="{{route('admin.frontend.sections', 'fake_review')}}" class="nav-link ">
+                                    <i class="menu-icon las la-dot-circle"></i>
+                                    <span class="menu-title">@lang('Fake Reviews')</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="sidebar-menu-item {{menuActive('admin.referrals.*')}}">
                     <a href="{{route('admin.referrals.index')}}" class="nav-link ">
                         <i class="menu-icon las la-link"></i>
@@ -523,7 +561,9 @@
                     </a>
                 </li>
 
-                <li class="sidebar-menu-item sidebar-dropdown">
+                <!-- Sections -->
+
+                {{-- <li class="sidebar-menu-item sidebar-dropdown">
                     <a href="javascript:void(0)" class="{{menuActive('admin.frontend.sections*',3)}}">
                         <i class="menu-icon la la-html5"></i>
                         <span class="menu-title">@lang('Manage Section')</span>
@@ -545,7 +585,7 @@
                             @endforeach
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="sidebar__menu-header">@lang('Extra')</li>
 

@@ -33,6 +33,7 @@
                             aria-controls="contact" aria-selected="false">Instagram</a>
                     </li>
                 </ul>
+
                 <div class="tab-content" id="myTabContent">
 
                     <div class="tab-pane fade show active" id="yt" role="tabpanel" aria-labelledby="yt-tab">
@@ -48,8 +49,7 @@
                                                         <div class="avatar avatar-50 rounded">
                                                             <div class="background">
                                                                 @if ($ad->ads_type == 4)
-                                                                    <img src="{{ asset($activeTemplateTrue . '/assets/img/services/yt_logo.png') }}"
-                                                                        alt="">
+                                                                    <img src="{{ asset($activeTemplateTrue . '/assets/img/services/yt_logo.png') }}" alt="">
                                                                 @endif
                                                             </div>
                                                         </div>
